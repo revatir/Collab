@@ -73,29 +73,9 @@ _The **Collab** MVP consists of an application that allows you to create a profi
 
 > Use the Wireframes section to display desktop, tablet and mobile views.
 
-![Dummy Link](url)
+![Wireframes](https://wireframe.cc/pro/pp/db51570df312203)
 
-- Desktop Landing
-
-![Dummy Link](url)
-
-- Desktop Hero
-
-![Dummy Link](url)
-
-- Resource Index
-
-![Dummy Link](url)
-
-- Resource Show
-
-![Dummy Link](url)
-
-- Tablet Resource Index
-
-![Dummy Link](url)
-
-- Mobile Resource Index
+- Wireframes
 
 #### Component Hierarchy
 
@@ -153,7 +133,7 @@ src
 
 #### ERD Model
 
-> Use this section to display an image of a computer generated ERD model.
+> https://www.lucidchart.com/invitations/accept/2ea8a5da-2524-4fb9-96d3-4bcb9d0bbf5e
 
 #### Data Heirarchy
 
