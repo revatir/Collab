@@ -1,10 +1,17 @@
 class CompaniesController < ApplicationController
-  before_action :set_user
+  skip_before_action :authorize_request, only: :indexall
+  before_action :set_user, only: [:index, :create]
   before_action :set_user_company, only: [:show, :update, :destroy]
 
   # GET /users/:user_id/companies
   def index
     json_response(@user.company)
+  end
+
+   #GET /companies
+  def indexall
+    @companies = Company.all
+    json_response(@companies)
   end
 
   # POST /users/:user_id/companies
