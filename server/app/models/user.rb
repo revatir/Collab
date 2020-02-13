@@ -4,5 +4,6 @@ class User < ApplicationRecord
 
   has_one :company
 
-  validates_presence_of :username, :password_digest
+  validates_presence_of :password_digest
+  validates :username, uniqueness: true, presence: true
 end

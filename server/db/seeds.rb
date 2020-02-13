@@ -18,6 +18,7 @@ company1 = Company.create(
                                    about: "Resolve helps you track and share your personal and professsional goals.",
                                    unique: "We make reaching your goals a social activity!",
                                    website: "resolve.surge.sh",
+                                   logo_url: "https://postimg.cc/8jq1Mkvt",
                                    user_id: 1,
                                    )
 company2 = Company.create(
@@ -28,6 +29,7 @@ company2 = Company.create(
                                    about: "WeWork designs and builds physical and virtual shared spaces and office services for entrepreneurs and companies.",
                                    unique: "Whether you’re an established enterprise or a growing startup, we build spaces that inspire your most impactful work.",
                                    website: "wework.com",
+                                   logo_url: "https://yt3.ggpht.com/a/AGF-l78HuW5H6AUkZMf7AOMun9y4cR-1crdEYdEr=s900-c-k-c0xffffffff-no-rj-mo",
                                    user_id: 2,
                                    )
 company3 = Company.create(
@@ -38,6 +40,7 @@ company3 = Company.create(
                                    about: "Compass is a licensed real estate broker that utilizes the Internet as a marketing medium with the use of real estate technology.",
                                    unique: "We were the first company to have built a proprietary mobile app for real estate agents!",
                                    website: "compass.com",
+                                   logo_url: "https://i.pinimg.com/originals/ff/5a/74/ff5a746102c2fa2381c6a0ae80fbbfeb.jpg",
                                    user_id: 3,
                                    )
 
