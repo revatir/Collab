@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
-  skip_before_action :authorize_request, only: :indexall
-  before_action :set_user, only: [:index, :create]
+  skip_before_action :authorize_request, only: [:indexall, :create]
+  before_action :set_user, only: [:index]
   before_action :set_user_company, only: [:show, :update, :destroy]
 
   # GET /users/:user_id/companies
@@ -43,6 +43,7 @@ class CompaniesController < ApplicationController
   def company_params
     params.permit(:company_name, :category_1, :category_2, :category_3, :about, :unique, :website, :user_id, :logo_url)
   end
+
 
   def set_user
     @user = User.find(params[:user_id])
