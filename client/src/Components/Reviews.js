@@ -1,11 +1,24 @@
 import React, { Component } from 'react'
+import { showReviews, createReview } from '../Services/api_helper'
 
 export default class Reviews extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      newReview: ""
+      reviews: [],
+      review: ""
+    }
+  }
+
+  componentDidMount = async () => {
+    try {
+      const reviews = await showReviews(this.props.userId)
+      this.setState({
+        reviews,
+      })
+    } catch (e) {
+      console.error(e)
     }
   }
 
@@ -16,12 +29,21 @@ export default class Reviews extends Component {
     })
   }
 
+  handleSubmit = async (e) => {
+    e.preventDefault()
+    let newReviews = await createReview(this.props.userId, { review: this.state.review })
+    newReviews = newReviews.data
+    this.setState({
+      reviews: newReviews
+    })
+  }
+
   render() {
     return (
       <div>
         <section>
           <h2>Reviews</h2>
-          {this.props.reviews.map(review => (
+          {this.state.reviews.map(review => (
             <div key={review.id}>
               <p>{review.review}</p>
             </div>
@@ -29,13 +51,13 @@ export default class Reviews extends Component {
         </section>
         <section>
           <h3>Review This Company:</h3>
-          <form onSubmit={(e) => this.handleSubmit(e, { newReview: this.state.newReview })}>
+          <form onSubmit={(e) => this.handleSubmit(e, { review: this.state.review })}>
             <span className="field">
               <label htmlFor="review">Review</label>
               <input
                 type="text"
-                name="username"
-                value={this.state.newReview}
+                name="review"
+                value={this.state.review}
                 onChange={this.handleChange}
               />
             </span>
