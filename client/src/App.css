@@ -1,0 +1,21 @@
+.App {
+  font-family: Helvetica, sans-serif;
+}
+
+/* MENU SECTION */
+nav > ul {
+  display: flex;
+  justify-content: space-around;
+  align-content: space-around;
+  padding: 0px;
+  list-style-type: none;
+}
+
+/* HEADER SECTION  */
+header {
+  text-align: center;
+}
+
+img {
+  max-width: 5vw;
+}
