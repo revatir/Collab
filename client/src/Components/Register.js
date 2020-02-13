@@ -9,14 +9,14 @@ export default class Register extends Component {
       username: "",
       password: "",
       email: "",
-      companyName: "",
-      category1: "",
-      category2: "",
-      category3: "",
+      company_name: "",
+      category_1: "",
+      category_2: "",
+      category_3: "",
       about: "",
       unique: "",
       website: "",
-      logoURL: "",
+      logo_url: "",
       errorText: ''
     }
   }
@@ -29,29 +29,55 @@ export default class Register extends Component {
 
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     if (!this.state.username ||
       !this.state.password ||
-      !this.state.email)
-    // !this.state.companyName ||
-    // !this.state.category1 ||
-    // !this.state.about ||
-    // !this.state.unique)
-    {
+      !this.state.email ||
+      !this.state.company_name ||
+      !this.state.category_1 ||
+      !this.state.about ||
+      !this.state.unique) {
       this.setState({
         errorText: "Please fill in all of the required fields!"
       })
-    } else if (!this.state.logoUrl) {
+    } else if (!this.state.logo_url) {
+      this.props.handleRegister(e,
+        {
+          username: this.state.username,
+          password: this.state.password,
+          email: this.state.email
+        },
+        {
+          company_name: this.state.company_name,
+          category_1: this.state.category_1,
+          category_2: this.state.category_2,
+          category_3: this.state.category_3,
+          about: this.state.about,
+          unique: this.state.unique,
+          website: this.state.website,
+          logo_url: "http://www.racemph.com/wp-content/uploads/2016/09/profile-image-placeholder.png"
+        })
 
-      this.props.handleRegister(e, { username: this.state.username, password: this.state.password, email: this.state.email })
-      // this.props.handleCreateCompany(e, { companyName: this.state.companyName, category1: this.state.category1, category2: this.state.category2, category3: this.state.category3, about: this.state.about, unique: this.state.unique, website: this.state.website, logoUrl: "http://www.racemph.com/wp-content/uploads/2016/09/profile-image-placeholder.png" })
     } else {
-      this.props.handleRegister(e, { username: this.state.username, password: this.state.password, email: this.state.email })
-      // this.props.handleCreateCompany(e, { companyName: this.state.companyName, category1: this.state.category1, category2: this.state.category2, category3: this.state.category3, about: this.state.about, unique: this.state.unique, website: this.state.website, logoURL: this.state.logoURL })
+      this.props.handleRegister(e,
+        {
+          username: this.state.username,
+          password: this.state.password,
+          email: this.state.email
+        },
+        {
+          company_name: this.state.company_name,
+          category_1: this.state.category_1,
+          category_2: this.state.category_2,
+          category_3: this.state.category_3,
+          about: this.state.about,
+          unique: this.state.unique,
+          website: this.state.website,
+          logo_url: this.state.logo_url
+        })
     }
   }
-
   render() {
     return (
       <div>
@@ -97,39 +123,39 @@ export default class Register extends Component {
                   onChange={this.handleChange}
                 />
               </span>
-              {/* <span className="field">
-                <label htmlFor="companyName">Company Name*</label>
+              <span className="field">
+                <label htmlFor="company_name">Company Name*</label>
                 <input
                   type="text"
-                  name="companyName"
-                  value={this.state.companyName}
+                  name="company_name"
+                  value={this.state.company_name}
                   onChange={this.handleChange}
                 />
               </span>
               <span className="field">
-                <label htmlFor="category1">Category 1*</label>
+                <label htmlFor="category_1">Category 1*</label>
                 <input
                   type="text"
-                  name="category1"
-                  value={this.state.category1}
+                  name="category_1"
+                  value={this.state.category_1}
                   onChange={this.handleChange}
                 />
               </span>
               <span className="field">
-                <label htmlFor="category2">Category 2*</label>
+                <label htmlFor="category_2">Category 2*</label>
                 <input
                   type="text"
-                  name="category2"
-                  value={this.state.category2}
+                  name="category_2"
+                  value={this.state.category_2}
                   onChange={this.handleChange}
                 />
               </span>
               <span className="field">
-                <label htmlFor="category3">Category 3*</label>
+                <label htmlFor="category_3">Category 3*</label>
                 <input
                   type="text"
-                  name="category3"
-                  value={this.state.category3}
+                  name="category_3"
+                  value={this.state.category_3}
                   onChange={this.handleChange}
                 />
               </span>
@@ -161,14 +187,14 @@ export default class Register extends Component {
                 />
               </span>
               <span className="field">
-                <label htmlFor="logoURL">Logo URL</label>
+                <label htmlFor="logo_url">Logo URL</label>
                 <input
                   type="text"
-                  name="logoURL"
-                  value={this.state.logoURL}
+                  name="logo_url"
+                  value={this.state.logo_url}
                   onChange={this.handleChange}
                 />
-              </span> */}
+              </span>
               <input type="submit" className="submit" value="Register" />
             </form>
             <div className="header-buttons-container redirect">
