@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { showCompany, showReviews } from '../Services/api_helper';
+import { showCompany } from '../Services/api_helper';
 
 import Reviews from './Reviews';
 
@@ -9,19 +9,15 @@ export default class MyProfile extends Component {
 
     this.state = {
       company: {},
-      reviews: []
     }
   }
 
   componentDidMount = async () => {
     try {
       const company = await showCompany(this.props.currentUserId);
-      const reviews = await showReviews(this.props.currentUserId)
       this.setState({
         company,
-        reviews,
       })
-      console.error(this.state.company)
     } catch (e) {
       console.error(e)
     }
@@ -41,6 +37,7 @@ export default class MyProfile extends Component {
         <p>{this.state.company.unique}</p>
         <Reviews
           reviews={this.state.reviews}
+          userId={this.props.currentUserId}
         />
       </div>
     )
