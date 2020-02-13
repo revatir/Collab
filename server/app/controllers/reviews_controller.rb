@@ -7,35 +7,34 @@ class ReviewsController < ApplicationController
     json_response(@company.reviews)
   end
 
-  # POST /users/:user_id/company
-  def create
-    @company.review.create!(review_params)
-    # json_response(@review, :created)
-    json_response(status: "SUCCESS", message: 'Review created successfully.', data: @review.review)
-
-  end
-
   # GET /users/:user_id/companies/:id/review/:id
   def show
     json_response(@review)
   end
 
+  # POST /users/:user_id/company
+  def create
+    @company.reviews.create!(review_params)
+    # json_response(@review, :created)
+    json_response(status: "SUCCESS", message: 'Review created successfully.', data: @review)
+  end
+
   # PUT /users/:user_id/company
   def update
     @review.update(review_params)
-    json_response(status: 'SUCCESS', message: 'Company updated successfully.', data: @review.review)
+    json_response(status: 'SUCCESS', message: 'Company updated successfully.', data: @review)
   end
 
   # DELETE /users/:users_id/company
   def destroy
     @review.destroy
-    json_response(status: 'SUCCESS', message: 'Review deleted successfully.', data: @review.review)
+    json_response(status: 'SUCCESS', message: 'Review deleted successfully.', data: @review)
   end
 
   private
 
   def review_params
-    params.permit(:review_review, :done)
+    params.permit(:review, :done)
   end
 
   def set_company
