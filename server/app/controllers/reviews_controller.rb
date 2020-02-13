@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
   def create
     @company.reviews.create!(review_params)
     # json_response(@review, :created)
-    json_response(status: "SUCCESS", message: 'Review created successfully.', data: @review)
+    json_response(status: "SUCCESS", message: 'Review created successfully.', data: @company.reviews)
   end
 
   # PUT /users/:user_id/company
