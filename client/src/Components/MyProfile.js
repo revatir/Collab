@@ -3,7 +3,7 @@ import { showCompany, showReviews } from '../Services/api_helper';
 
 import Reviews from './Reviews';
 
-export default class Profile extends Component {
+export default class MyProfile extends Component {
   constructor(props) {
     super(props)
 
