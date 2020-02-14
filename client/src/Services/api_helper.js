@@ -83,3 +83,10 @@ export const createReview = async (id, postData) => {
   const resp = await api.post(`/users/${id}/companies/${id}/reviews`, postData);
   return resp.data;
 }
+
+//DELETE REVIEWS
+export const deleteReview = async (userId, reviewId) => {
+  const resp = await api.delete(`/users/${userId}/companies/${userId}/reviews/${reviewId}`);
+  return resp.data;
+}
+
