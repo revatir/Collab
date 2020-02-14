@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { showReviews, createReview } from '../Services/api_helper'
+import { showReviews, createReview, deleteReview } from '../Services/api_helper'
 
 export default class Reviews extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ export default class Reviews extends Component {
       this.setState({
         reviews,
       })
+      console.log(this.props.currentUser)
     } catch (e) {
       console.error(e)
     }
@@ -29,14 +30,35 @@ export default class Reviews extends Component {
     })
   }
 
-  handleSubmit = async (e) => {
+  handleSubmitReview = async (e) => {
     e.preventDefault()
-    let newReviews = await createReview(this.props.userId, { review: this.state.review })
-    newReviews = newReviews.data
+    const reviews = this.state.reviews
+    let review = await createReview(this.props.userId,
+      {
+        user_id: this.props.currentUser.id,
+        submitted_user: this.props.currentUser.username,
+        submitted_company: this.props.currentUserCompany.company_name,
+        review: this.state.review
+      })
+    review = review.data
     this.setState({
-      reviews: newReviews
+      reviews: [...reviews, review]
     })
+    console.log(this.state.reviews)
   }
+
+  handleDeleteReview = async (e, userId, reviewId) => {
+    e.preventDefault()
+    await deleteReview(userId, reviewId)
+    const reviews = this.state.reviews.filter(review => (
+      review.id !== reviewId
+    ))
+    this.setState({
+      reviews,
+    })
+    console.log(this.state.reviews)
+  }
+
 
   render() {
     return (
@@ -46,24 +68,34 @@ export default class Reviews extends Component {
           {this.state.reviews.map(review => (
             <div key={review.id}>
               <p>{review.review}</p>
+              <p>Submitted By: {review.submitted_user}</p>
+              <p>From: {review.submitted_company}</p>
+              {this.props.currentUser.username === review.submitted_user &&
+                <div>
+                  <input type="submit" className="edit" value="Edit Review" onClick={(e) => this.handleEditReview(e, review.id)} />
+                  <input type="submit" className="delete" value="Delete Review" onClick={(e) => this.handleDeleteReview(e, this.props.userId, review.id)} />
+                </div>
+              }
             </div>
           ))}
         </section>
-        <section>
-          <h3>Review This Company:</h3>
-          <form onSubmit={(e) => this.handleSubmit(e, { review: this.state.review })}>
-            <span className="field">
-              <label htmlFor="review">Review</label>
-              <input
-                type="text"
-                name="review"
-                value={this.state.review}
-                onChange={this.handleChange}
-              />
-            </span>
-            <input type="submit" className="submit" value="Submit" />
-          </form>
-        </section>
+        {parseInt(this.props.userId) !== parseInt(this.props.currentUser.id) &&
+          <section>
+            <h3>Review This Company:</h3>
+            <form onSubmit={(e) => this.handleSubmitReview(e)}>
+              <span className="field">
+                <label htmlFor="review">Review</label>
+                <input
+                  type="text"
+                  name="review"
+                  value={this.state.review}
+                  onChange={this.handleChange}
+                />
+              </span>
+              <input type="submit" className="submit" value="Submit Review" />
+            </form>
+          </section>
+        }
       </div >
     )
   }
