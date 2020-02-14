@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom'
 
 //Services
-import { loginUser, registerUser, verifyUser, createCompany } from './Services/api_helper.js'
+import { loginUser, registerUser, verifyUser, createCompany, showCompany } from './Services/api_helper.js'
 
 //Custom Components
 import Header from './Components/Header'
@@ -23,10 +23,9 @@ class App extends Component {
 
     this.state = {
       currentUser: false,
-      newCompany: {},
+      currentUserCompany: false,
       apiDataLoaded: false,
       errorText: "",
-      alert: null,
       counter: 0
     }
   }
@@ -35,9 +34,9 @@ class App extends Component {
     verifyUser();
     if (localStorage.getItem('authToken')) {
       const id = parseInt(localStorage.getItem('id'));
-      const name = localStorage.getItem('name');
+      const username = localStorage.getItem('name');
       const email = localStorage.getItem('email');
-      const user = { name, email, id };
+      const user = { username, email, id };
       user && this.setState({
         currentUser: user
       })
@@ -68,13 +67,8 @@ class App extends Component {
     }
   }
 
-  // handleCreateCompany = async (companyData) => {
-  //   await createCompany(companyData, this.state.currentUser.id);
-  // }
-
   handleLogin = async (e, loginData) => {
     e.preventDefault();
-
     if (!loginData.username || !loginData.password) {
       this.setState({
         errorText: "Please enter Username & Password!"
@@ -82,10 +76,13 @@ class App extends Component {
     } else {
       try {
         const currentUser = await loginUser(loginData);
-        this.setState({ currentUser })
+        const currentUserCompany = await showCompany(currentUser.id);
         this.setState({
+          currentUser,
+          currentUserCompany,
           errorText: ''
         })
+        console.log(`LOGGED IN`, this.state.currentUser, this.state.currentUserCompany)
         this.props.history.push('/explore');
       } catch (e) {
         console.log(e.message)
@@ -104,10 +101,15 @@ class App extends Component {
   }
 
   handleLogout = () => {
-    this.setState({
-      currentUser: null
-    })
     localStorage.removeItem('authToken');
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
+    localStorage.removeItem('id');
+    this.setState({
+      currentUser: false,
+      currentUserCompany: false
+    })
+    console.log(`LOGGED OUT`, this.state.currentUser, this.state.currentUserCompany)
     this.props.history.push('/');
   }
 
@@ -152,12 +154,14 @@ class App extends Component {
           <Profile
             users={this.state.users}
             userId={props.match.params.id}
+            currentUserCompany={this.state.currentUserCompany}
             currentUser={this.state.currentUser}
           />
         )} />
         <Route exact path="/myprofile" render={(props) => (
           <MyProfile
             users={this.state.users}
+            currentUserCompany={this.state.currentUserCompany}
             currentUser={this.state.currentUser}
             currentUserId={this.state.currentUser.id}
           />
