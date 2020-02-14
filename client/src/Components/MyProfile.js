@@ -38,6 +38,8 @@ export default class MyProfile extends Component {
         <Reviews
           reviews={this.state.reviews}
           userId={this.props.currentUserId}
+          currentUser={this.props.currentUser}
+          currentUserCompany={this.props.currentUserCompany}
         />
       </div>
     )
