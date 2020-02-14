@@ -46,5 +46,8 @@ company3 = Company.create(
 
 review = Review.create(
     review: "This company changed my life.",
-    company_id: 1
+    company_id: 1,
+    submitted_company: "WeWork",
+    user_id: 2,
+    submitted_user: "adam",
     )
