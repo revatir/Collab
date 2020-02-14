@@ -39,6 +39,8 @@ export default class Profile extends Component {
         <Reviews
           reviews={this.state.reviews}
           userId={this.props.userId}
+          currentUser={this.props.currentUser}
+          currentUserCompany={this.props.currentUserCompany}
         />
       </div>
     )
