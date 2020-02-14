@@ -14,18 +14,18 @@ class ReviewsController < ApplicationController
 
   # POST /users/:user_id/company
   def create
-    @company.reviews.create!(review_params)
+    @review = @company.reviews.create!(review_params)
     # json_response(@review, :created)
-    json_response(status: "SUCCESS", message: 'Review created successfully.', data: @company.reviews)
+    json_response(status: "SUCCESS", message: 'Review created successfully.', data: @review)
   end
 
-  # PUT /users/:user_id/company
+  # PUT /users/:user_id/company/:company_id/reviews/:review_id
   def update
     @review.update(review_params)
     json_response(status: 'SUCCESS', message: 'Company updated successfully.', data: @review)
   end
 
-  # DELETE /users/:users_id/company
+  # DELETE /users/:users_id/company/:company_id/reviews/:review_id
   def destroy
     @review.destroy
     json_response(status: 'SUCCESS', message: 'Review deleted successfully.', data: @review)
@@ -34,7 +34,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.permit(:review, :done)
+    params.permit(:user_id, :submitted_user, :submitted_company, :review, :done)
   end
 
   def set_company
@@ -42,6 +42,6 @@ class ReviewsController < ApplicationController
   end
 
   def set_company_review
-    @review = @company.review.find_by!(id: params[:id]) if @company
+    @review = @company.reviews.find_by!(id: params[:id]) if @company
   end
 end
