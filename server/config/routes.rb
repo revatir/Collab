@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   post 'auth/login', to: 'authentication#authenticate'
   post 'signup', to: 'users#create'
   get 'companies', to: 'companies#indexall'
-
+  get 'reviews', to: 'reviews#indexall'
 end
