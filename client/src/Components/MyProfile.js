@@ -28,14 +28,18 @@ export default class MyProfile extends Component {
 
   render() {
     return (
-      <div>
+      <div className="profile">
         <h2>{this.state.company.company_name}</h2>
         <img src={this.state.company.logo_url} alt="logo" />
+        <h3>Categories</h3>
         <p>{this.state.company.category_1}</p>
         <p>{this.state.company.category_2}</p>
         <p>{this.state.company.category_3}</p>
+        <h3>Website</h3>
         <p>{this.state.company.website}</p>
+        <h3>About Us</h3>
         <p>{this.state.company.about}</p>
+        <h3>What Makes Us Unique?</h3>
         <p>{this.state.company.unique}</p>
         <Reviews
           reviews={this.state.reviews}
