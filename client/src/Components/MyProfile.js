@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom'
 import { showCompany } from '../Services/api_helper';
+import UpdateCompany from './UpdateCompany.js'
 
 import Reviews from './Reviews';
 
@@ -41,6 +43,13 @@ export default class MyProfile extends Component {
           currentUser={this.props.currentUser}
           currentUserCompany={this.props.currentUserCompany}
         />
+        <Route path="/companies/:id/edit" render={(props) => (
+          <UpdateCompany
+            companies={this.state.companies}
+            updateCompany={this.updateCompany}
+            companyId={props.match.params.id}
+          />
+        )} />
       </div>
     )
   }
