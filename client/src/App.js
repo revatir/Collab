@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom'
 
 //Services
-import { loginUser, registerUser, verifyUser, createCompany, showCompany } from './Services/api_helper.js'
+import { loginUser, registerUser, verifyUser, createCompany, showCompany, putReview, showAllReviews } from './Services/api_helper.js'
 
 //Custom Components
 import Header from './Components/Header'
@@ -13,6 +13,7 @@ import Login from './Components/Login.js'
 import Register from './Components/Register.js'
 import Profile from './Components/Profile.js'
 import MyProfile from './Components/MyProfile.js'
+import UpdateReview from './Components/UpdateReview.js'
 
 //CSS Component
 import './App.css';
@@ -26,11 +27,12 @@ class App extends Component {
       currentUserCompany: false,
       apiDataLoaded: false,
       errorText: "",
-      counter: 0
+      counter: 0,
+      reviews: [],
     }
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
     verifyUser();
     if (localStorage.getItem('authToken')) {
       const id = parseInt(localStorage.getItem('id'));
@@ -77,9 +79,11 @@ class App extends Component {
       try {
         const currentUser = await loginUser(loginData);
         const currentUserCompany = await showCompany(currentUser.id);
+        const reviews = await showAllReviews()
         this.setState({
           currentUser,
           currentUserCompany,
+          reviews,
           errorText: ''
         })
         console.log(`LOGGED IN`, this.state.currentUser, this.state.currentUserCompany)
@@ -111,6 +115,15 @@ class App extends Component {
     })
     console.log(`LOGGED OUT`, this.state.currentUser, this.state.currentUserCompany)
     this.props.history.push('/');
+  }
+
+  handleEditReview = async (e, companyId, reviewId, reviewData) => {
+    e.preventDefault()
+    const updatedReview = await putReview(companyId, reviewId, reviewData);
+    const changedReviews = this.state.reviews.map(review => parseInt(review.id) === parseInt(reviewId) ? updatedReview : review);
+    console.log(changedReviews);
+    this.setState({ reviews: changedReviews });
+    this.props.history.push(`/profile/${companyId}`);
   }
 
   render() {
@@ -164,6 +177,13 @@ class App extends Component {
             currentUserCompany={this.state.currentUserCompany}
             currentUser={this.state.currentUser}
             currentUserId={this.state.currentUser.id}
+          />
+        )} />
+        <Route path="/reviews/:id/edit" render={(props) => (
+          <UpdateReview
+            reviews={this.state.reviews}
+            handleEditReview={this.handleEditReview}
+            reviewId={props.match.params.id}
           />
         )} />
       </div>
