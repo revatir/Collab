@@ -72,7 +72,13 @@ export const createCompany = async (postData, id) => {
 
 // REVIEW CRUD
 
-// GET REVIEWS
+// GET ALL REVIEWS
+export const showAllReviews = async () => {
+  const resp = await api.get(`/reviews`);
+  return resp.data;
+}
+
+// GET USER REVIEWS
 export const showReviews = async (id) => {
   const resp = await api.get(`/users/${id}/companies/${id}/reviews`);
   return resp.data;
@@ -89,4 +95,11 @@ export const deleteReview = async (userId, reviewId) => {
   const resp = await api.delete(`/users/${userId}/companies/${userId}/reviews/${reviewId}`);
   return resp.data;
 }
+
+//DELETE REVIEWS
+export const putReview = async (companyId, reviewId, postData) => {
+  const resp = await api.put(`/users/${companyId}/companies/${companyId}/reviews/${reviewId}`, postData);
+  return resp.data;
+}
+
 
