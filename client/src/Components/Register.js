@@ -88,7 +88,7 @@ export default class Register extends Component {
             </div>
           </div>
           :
-          <div className="auth">
+          <div className="register-form">
             <form onSubmit={(e) => this.handleSubmit(e)}>
               <h2>Let's get started...</h2>
               {this.state.errorText && <p className="error-text">{this.state.errorText}</p>}
@@ -197,9 +197,6 @@ export default class Register extends Component {
               </span>
               <input type="submit" className="submit" value="Register" />
             </form>
-            <div className="header-buttons-container redirect">
-              <Link to="/login">Already have an account?</Link>
-            </div>
           </div>
         }
       </div>
