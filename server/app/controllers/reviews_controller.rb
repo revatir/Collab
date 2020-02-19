@@ -34,7 +34,7 @@ class ReviewsController < ApplicationController
     @company = Company.find(params[:company_id])
     @review = @company.reviews.find_by!(id: params[:id]) if @company
     @review.update(review_params)
-    json_response(status: 'SUCCESS', message: 'Company updated successfully.', data: @review)
+    json_response(@review)
   end
 
   # DELETE /users/:users_id/company/:company_id/reviews/:review_id
