@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { showReviews, createReview, deleteReview } from '../Services/api_helper'
 
 export default class Reviews extends Component {
@@ -47,6 +48,9 @@ export default class Reviews extends Component {
     console.log(this.state.reviews)
   }
 
+
+
+
   handleDeleteReview = async (e, userId, reviewId) => {
     e.preventDefault()
     await deleteReview(userId, reviewId)
@@ -58,7 +62,6 @@ export default class Reviews extends Component {
     })
     console.log(this.state.reviews)
   }
-
 
   render() {
     return (
@@ -72,7 +75,8 @@ export default class Reviews extends Component {
               <p>From: {review.submitted_company}</p>
               {this.props.currentUser.username === review.submitted_user &&
                 <div>
-                  <input type="submit" className="edit" value="Edit Review" onClick={(e) => this.handleEditReview(e, review.id)} />
+                  <Link to={`/reviews/${review.id}/edit`}><button>Edit Review</button></Link>
+
                   <input type="submit" className="delete" value="Delete Review" onClick={(e) => this.handleDeleteReview(e, this.props.userId, review.id)} />
                 </div>
               }
