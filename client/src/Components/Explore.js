@@ -56,7 +56,7 @@ class Explore extends Component {
     }
 
     return (
-      <div>
+      <div className="explore-section-wrapper">
         {!this.props.currentUser ?
           <div className="restrict">
             <h1>Please <a href="/login">login</a> to see your feed.</h1>
@@ -71,9 +71,14 @@ class Explore extends Component {
                 {this.state.apiDataLoaded && this.state.search &&
                   this.state.filteredCompanies.map(company => (
                     <Link style={linkStyle} to={`/profile/${company.id}`} key={company.id}>
-                      <div key={company.id} className="companyies">
+                      <div key={company.id} className="companies">
                         <h4>{company.company_name}</h4>
                         <img onError={this.addDefaultSrc} src={company.logo_url} alt="company" />
+                        <div className="categories">
+                          <p>{company.category_1}</p>
+                          <p>{company.category_2}</p>
+                          <p>{company.category_3}</p>
+                        </div>
                       </div>
                     </Link>
                   ))
@@ -84,6 +89,11 @@ class Explore extends Component {
                       <div key={company.id} className="companies">
                         <h4>{company.company_name}</h4>
                         <img onError={this.addDefaultSrc} src={company.logo_url} alt="user" />
+                        <div className="categories">
+                          <p>{company.category_1}</p>
+                          <p>{company.category_2}</p>
+                          <p>{company.category_3}</p>
+                        </div>
                       </div>
                     </Link>
                   ))}
