@@ -52,3 +52,119 @@ nav > ul > a:hover {
   border-bottom: 1px solid rgba(0,0,0, 1);
 }
 
+/* HEADER SECTION  */
+
+.header-wrapper {
+  border: 2px solid white;
+  background-color: #FFDE0A;
+  padding: 1vh;
+  margin-bottom: 1vw;
+}
+
+header {
+  text-align: center;
+  border: 2px solid white;
+  margin: 3vh 20vw;
+  /* font-family: "Montserrat", sans-serif; */
+}
+
+header > h1 {
+  letter-spacing: 10px;
+  font-size: 46px;
+  margin: 10px 0 0 0;
+  /* font-family: "Montserrat", sans-serif; */
+}
+
+/* LOGIN PAGE */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  min-width: 25%;
+  margin-top: 1vw;
+  padding: 3.75vw;
+  border: 2px solid rgba(255, 222, 10,.46);
+  border-radius: .5vw;
+  min-height: 100%;
+  max-width: 20%;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3vw;
+}
+
+.field > label {
+  margin-bottom: .3vw;
+}
+
+.field > input {
+  min-width: 100%;
+  border: hidden;
+  border-bottom: 1px solid black;
+  min-height: 25px;
+  text-transform: none;
+  outline: none;
+  color: black;
+  transition: all 0.15s ease-in-out;
+}
+
+/* .field > input:hover, .field > input:focus {
+  background-color: rgba(0, 0, 0, 0.25);
+} */
+
+.submit {
+  margin-top: .75vw;
+  background-color: #FFDE0A;
+  color: black;
+  border: hidden;
+  padding: .4vw;
+  border-radius: 5px;
+  min-height: 30px;
+  align-self: center;
+  min-width: 80%;
+  outline: none;
+  transition: all 0.25s ease-in-out;
+  margin-bottom: -1.5vw;
+  cursor: pointer;
+}
+
+.submit:hover {
+  /* color: white; */
+  background-color: rgba(255, 222, 10, 0.5);
+
+}
+
+/* EXPLORE PAGE */
+
+.explore-section-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1vw 25vw;
+  border: none;
+  margin-bottom: 5vw;
+}
+
+.search-bar > input {
+  min-width: 200%;
+  border: hidden;
+  border-bottom: 1px solid black;
+  min-height: 25px;
+  text-transform: none;
+  outline: none;
+  color: black;
+}
