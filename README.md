@@ -43,10 +43,8 @@ _The **Collab** MVP consists of an application that allows you to create a profi
 
 - _Company Profile where companies can list:_
   - _Company Name_
-  - _A status (ie. - We're in our first round of funding! Let us know if you have any tips.)_
   - _An "About Us" Section_
   - _A "What Makes Us Unique?" Section_
-  - _A "Connect" Button that links to email._
   - _A "Category" section (ie. software, publishing, photography etc.)._
   - _A link to their company website_
 - _A search bar where users can search for companies through name and category._
@@ -154,6 +152,8 @@ database_db
 
 ## Post-MVP
 
+- _A "Connect" Button that links to email._
+- _A status (ie. - We're in our first round of funding! Let us know if you have any tips.)_
 - _Personal User profiles affiliated with their company (one user can have multiple companies)._
 - _A follow button to follow company statuses_
 - _Connect Button that links to a chatroom so you can directly DM users through the app._
