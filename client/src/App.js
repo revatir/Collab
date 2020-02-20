@@ -86,10 +86,9 @@ class App extends Component {
           reviews,
           errorText: ''
         })
-        console.log(`LOGGED IN`, this.state.currentUser, this.state.currentUserCompany)
         this.props.history.push('/explore');
       } catch (e) {
-        console.log(e.message)
+        console.error(e.message)
         if (e.message === "Request failed with status code 401") {
           e.message = "Wrong username or password"
           this.setState({
@@ -113,7 +112,6 @@ class App extends Component {
       currentUser: false,
       currentUserCompany: false
     })
-    console.log(`LOGGED OUT`, this.state.currentUser, this.state.currentUserCompany)
     this.props.history.push('/');
   }
 
@@ -121,7 +119,6 @@ class App extends Component {
     e.preventDefault()
     const updatedReview = await putReview(companyId, reviewId, reviewData);
     const changedReviews = this.state.reviews.map(review => parseInt(review.id) === parseInt(reviewId) ? updatedReview : review);
-    console.log(changedReviews);
     this.setState({ reviews: changedReviews });
     this.props.history.push(`/profile/${companyId}`);
   }
@@ -140,7 +137,9 @@ class App extends Component {
           currentUser={this.state.currentUser}
         />
         <Route exact path="/" render={() => (
-          <LandingPage />
+          <LandingPage
+            currentUser={this.state.currentUser}
+          />
         )} />
         <Route path="/login" render={() => (
           <Login
@@ -148,7 +147,7 @@ class App extends Component {
             errorText={this.state.errorText}
             currentUser={this.state.currentUser} />
         )} />
-        <Route path="/register" render={() => (
+        <Route path="/register" render={(props) => (
           <div>
             <Register
               handleRegister={this.handleRegister}
