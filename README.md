@@ -47,7 +47,7 @@ _The **Collab** MVP consists of an application that allows you to create a profi
   - _A "What Makes Us Unique?" Section_
   - _A "Category" section (ie. software, publishing, photography etc.)._
   - _A link to their company website_
-- _A search bar where users can search for companies through name and category._
+- _A search bar where users can search for companies through name._
 - _An explore page that randomly shows companies in the platform._ 
 
 
@@ -153,6 +153,7 @@ database_db
 ## Post-MVP
 
 - _A "Connect" Button that links to email._
+- _A search bar where users can search for companies through category._
 - _A status (ie. - We're in our first round of funding! Let us know if you have any tips.)_
 - _Personal User profiles affiliated with their company (one user can have multiple companies)._
 - _A follow button to follow company statuses_
